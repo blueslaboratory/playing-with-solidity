@@ -26,10 +26,13 @@ Booleans
 Can only have one of the two following values: true or false. The keyword for booleans is bool.
 
 Integers
-Integers can be split into main groups: regular integers (can store both positive and negative values) and unsigned integers (can only store values that are 0 or higher)
--> Regular integer has keywords from int8 to int256. The number signifies the maximum number of bits it can store (thus limiting the maximum value), 
-and it can be any number between 8 and 256 as long as it incremented in steps of  (e.g., int16 is valid but int17 is not). The int keyword alone would be understood as int256.
--> Unsigned integers follow the same logic. The only difference is the keyword which ranges from uint8 to uint256. Keyword uint can also be used instead of uint256.
+Integers can be split into main groups: regular integers (can store both positive and negative values) and 
+unsigned integers (can only store values that are 0 or higher)
+-> Regular integer has keywords from int8 to int256. The number signifies the maximum number of bits it can store 
+(thus limiting the maximum value), and it can be any number between 8 and 256 as long as it incremented in steps of 8 
+(e.g., int16 is valid but int17 is not). The int keyword alone would be understood as int256.
+-> Unsigned integers follow the same logic. The only difference is the keyword which ranges from uint8 to uint256. 
+Keyword uint can also be used instead of uint256.
 
 Addresses
 The address keyword is used to hold Ethereum addresses. If you're planning to store an Ethereum address, you will need to use the address keyword.
@@ -110,6 +113,25 @@ A real-world example of a mapping:
 mapping(address => uint256) balance;
 
 This mapping could hold the bank account balance in uint256 for the given address.
+
+
+Assigning values to a mapping
+Attaching values to a mapping is pretty straight forward. The syntax is very similar to regular value assignment, 
+the only difference is that you need to specify the key. It is done like this:
+
+mapping(address => uint) score;
+
+function updatePoints(address _person, uint _points) {
+    score[_person] = _points;
+}
+
+Sender address
+The functions on Smart Contracts (unless they are internal or private - more on that in upcoming lessons) will be called directly 
+by accounts on Ethereum blockchain. Each account is a hexadecimal address that looks something like this:
+0x1961b3331969ed52770751fc718ef530838b6dee
+
+To retrieve the function caller’s address, you can use special variable msg.sender. For example:
+score[msg.sender] = 500;
 */
 
 
@@ -185,6 +207,10 @@ contract SpaceDoggos {
             coordY: 0
         });
 
+        /*
+        In createDoggo function, save the myDoggo variable you’ve created in the previous lesson to doggos mapping. 
+        Use sender’s address as the key.
+        */
         doggos[msg.sender] = myDoggo;
     }
 
