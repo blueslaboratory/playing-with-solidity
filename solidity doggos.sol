@@ -8,6 +8,7 @@ Version
 Solidity source files can contain any number of contract definitions. Each Solidity file also includes a thing called “Version Pragma”. 
 It is used to prevent the code from being compiled with future compiler versions that might introduce incompatible changes. 
 Most of the time, the definition looks like this:
+pragma solidity ^0.4.20;
 */
 
 
@@ -16,6 +17,7 @@ Contracts
 Contracts in Solidity are similar to classes in object-oriented languages. They contain data in variables and functions that can modify these variables.
 They are defined by using a contract keyword, followed by the contract name and and two brackets { } which will later enclose contract variables and functions. 
 For example:
+contract SpaceDoggos { }
 */
 
 
@@ -51,6 +53,30 @@ Integers can be used for arithmetic operations:
     Division x / y
     Remainder x % y
     Exponentiation x ** y (x to the power of y)
+*/
+
+
+/*
+Function 
+Functions are pieces of code that perform a specific task. Functions can take any number of variables as an input, 
+and it can return a specific value back. In case of Solidity, you can even return multiple values from one function.
+Here is a simple function that does not return any data but simply adds two values together and assigns the result 
+to a state variable sum:
+
+uint sum;
+function add(uint a, uint b) {
+    sum = a + b;
+}
+
+Function inputs are optional, but if there are any, they need to be comma-separated.
+If we want to return data and avoid changing the contract’s state, we can rewrite the function like this:
+
+function add(uint a, uint b) returns(uint)  {
+    return a + b;
+}
+
+Note that a new keyword returns() was used to specify the type of the function output. Because we added two uints together, 
+the result will also be uint. To return a value back, you need to use the return statement.
 */
 
 
@@ -136,27 +162,26 @@ score[msg.sender] = 500;
 
 
 /*
-Function 
-Functions are pieces of code that perform a specific task. Functions can take any number of variables as an input, 
-and it can return a specific value back. In case of Solidity, you can even return multiple values from one function.
-Here is a simple function that does not return any data but simply adds two values together and assigns the result 
-to a state variable sum:
+Hashes and Typecasting
+Hashes
+To generate the space and planets we will need to turn two numbers that correspond to X and Y coordinates to a seemingly 
+random code that we could use to determine the traits of the solar system and the planets that belong to it.
 
-uint sum;
-function add(uint a, uint b) {
-    sum = a + b;
-}
+For this purpose, we will use Ethereum’s KECCAK-256 algorithm that produces a 256-bit hexadecimal number. In Solidity, 
+you can use the keccak256 function to get the hash. You can pass any number of arguments to this function. For example:
+keccak256(123, 321);
 
-Function inputs are optional, but if there are any, they need to be comma-separated.
-If we want to return data and avoid changing the contract’s state, we can rewrite the function like this:
 
-function add(uint a, uint b) returns(uint)  {
-    return a + b;
-}
-
-Note that a new keyword returns() was used to specify the type of the function output. Because we added two uints together, 
-the result will also be uint. To return a value back, you need to use the return statement.
+Typecasting
+Sometimes you may need to do arithmetics with two variables that have different data types. Solidity will only allow 
+operations between two variables that have the same type. Therefore you need to convert one of the variables to the type 
+of the others. For example:
+uint8 x = 8;
+uint256 y = 10 ** 18;
+uint256 z = y * uint256(x);
 */
+
+
 
 contract SpaceDoggos {
 
@@ -214,7 +239,14 @@ contract SpaceDoggos {
         doggos[msg.sender] = myDoggo;
     }
 
-    // Write your function below
+
+    /*
+    Create a new function called getSystemMap that will take two uint variables _coordX and _coordY as arguments. 
+    The function will return one uint. All of this should be visible in the function definition.
+    In function’s getSystemMap body, return a keccak256 value of _coordX and _coordY. 
+    Because our function must return an uint, make sure to typecast it to uint.
+    */
+
     function getSystemMap(uint _coordX, uint _coordY) returns (uint) {
     return uint(keccak256(_coordX, _coordY));
     }
