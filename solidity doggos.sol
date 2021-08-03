@@ -5,14 +5,17 @@ pragma solidity ^0.4.20;
 
 /*
 Version
-Solidity source files can contain any number of contract definitions. Each Solidity file also includes a thing called “Version Pragma”. It is used to prevent the code from being compiled with future compiler versions that might introduce incompatible changes. Most of the time, the definition looks like this:
+Solidity source files can contain any number of contract definitions. Each Solidity file also includes a thing called “Version Pragma”. 
+It is used to prevent the code from being compiled with future compiler versions that might introduce incompatible changes. 
+Most of the time, the definition looks like this:
 */
 
 
 /*
 Contracts
 Contracts in Solidity are similar to classes in object-oriented languages. They contain data in variables and functions that can modify these variables.
-They are defined by using a contract keyword, followed by the contract name and and two brackets { } which will later enclose contract variables and functions. For example:
+They are defined by using a contract keyword, followed by the contract name and and two brackets { } which will later enclose contract variables and functions. 
+For example:
 */
 
 
@@ -24,7 +27,8 @@ Can only have one of the two following values: true or false. The keyword for bo
 
 Integers
 Integers can be split into main groups: regular integers (can store both positive and negative values) and unsigned integers (can only store values that are 0 or higher)
--> Regular integer has keywords from int8 to int256. The number signifies the maximum number of bits it can store (thus limiting the maximum value), and it can be any number between 8 and 256 as long as it incremented in steps of  (e.g., int16 is valid but int17 is not). The int keyword alone would be understood as int256.
+-> Regular integer has keywords from int8 to int256. The number signifies the maximum number of bits it can store (thus limiting the maximum value), 
+and it can be any number between 8 and 256 as long as it incremented in steps of  (e.g., int16 is valid but int17 is not). The int keyword alone would be understood as int256.
 -> Unsigned integers follow the same logic. The only difference is the keyword which ranges from uint8 to uint256. Keyword uint can also be used instead of uint256.
 
 Addresses
@@ -57,6 +61,35 @@ struct Car {
     uint16 year;
     uint16 horsepower;
 }
+
+
+Using structs
+Structs are created by specifying the values for each struct property.
+
+struct Car {
+    string make;
+    string model;
+    uint16 year;
+}
+
+function makeCar(uint16 _year) {
+    Car myCar = Car({
+        make: "Nissan",
+        model: "Micra",
+        year: _year
+    });
+}
+
+Please note how you can assign both constant values and values from variables. In this case, you can see how model value is a constant 
+and year value comes from function argument _year.
+
+Storage Types
+Solidity has two places where it can store variable data: storage (which is the blockchain itself) or memory (a temporary place 
+which is erased when it is no longer needed). Storage is expensive to use but memory is not. By default, structs and arrays reference 
+to storage and all other variables use memory. 
+If you want to make sure that a specific variable (a struct, for example) is stored in memory, you need to use the memory keyword. Like this:
+
+Pizza memory favoritePizza = Pizza({type: "pepperoni"});
 */
 
 
@@ -68,8 +101,10 @@ Mappings allow the programmer to create key-value pairs and store them as a list
 Mappings are defined like this:
 mapping(key_type => key_value) mappingName;
 
-key_type should be replaced by a data type. Two commonly used variable types for mapping keys that we already know about are address and uint. It is important to note that not every data type can be used as a key. For instance, structs and other mappings cannot be used as keys.
-Similarly, key_value should be replaced by the value type. Unlike with keys, Solidity does not limit the data type for values. It can be anything, including structs and other mappings.
+key_type should be replaced by a data type. Two commonly used variable types for mapping keys that we already know about are address and uint. 
+It is important to note that not every data type can be used as a key. For instance, structs and other mappings cannot be used as keys.
+Similarly, key_value should be replaced by the value type. Unlike with keys, Solidity does not limit the data type for values. 
+It can be anything, including structs and other mappings.
 
 A real-world example of a mapping:
 mapping(address => uint256) balance;
@@ -77,6 +112,29 @@ mapping(address => uint256) balance;
 This mapping could hold the bank account balance in uint256 for the given address.
 */
 
+
+/*
+Function 
+Functions are pieces of code that perform a specific task. Functions can take any number of variables as an input, 
+and it can return a specific value back. In case of Solidity, you can even return multiple values from one function.
+Here is a simple function that does not return any data but simply adds two values together and assigns the result 
+to a state variable sum:
+
+uint sum;
+function add(uint a, uint b) {
+    sum = a + b;
+}
+
+Function inputs are optional, but if there are any, they need to be comma-separated.
+If we want to return data and avoid changing the contract’s state, we can rewrite the function like this:
+
+function add(uint a, uint b) returns(uint)  {
+    return a + b;
+}
+
+Note that a new keyword returns() was used to specify the type of the function output. Because we added two uints together, 
+the result will also be uint. To return a value back, you need to use the return statement.
+*/
 
 contract SpaceDoggos {
 
@@ -105,7 +163,16 @@ contract SpaceDoggos {
     Create a mapping called doggos, with key type address and value type Doggo. We will use this mapping to keep track
     of which Ethereum address owns which Doggo.
     */
+
     mapping(address => Doggo) doggos;
+
+    /*
+    Function with struct:
+    Inside function createDoggo, define a new variable called myDoggo that has the type Doggo (it is a struct we created earlier). 
+    Pay attention to the case of these two words. It is important! Make sure the variable is stored in memory
+    Assign myDoggo variable a new struct Doggo, by using function arguments as inputs for each of its corresponding property. 
+    For properties coordX and coordY, use 0 as the value.
+    */
 
     function createDoggo(string _name, uint8 _breed, uint8 _color, uint8 _face, uint8 _costume) {
         Doggo memory myDoggo = Doggo({
