@@ -60,6 +60,23 @@ struct Car {
 */
 
 
+/*
+Mappings
+We’ll learn how to create a variable that will later map your Doggo to blockchain - a special list where all other Doggos are stored.
+Mappings allow the programmer to create key-value pairs and store them as a list. Concepts like this also are known as hash tables.
+
+Mappings are defined like this:
+mapping(key_type => key_value) mappingName;
+
+key_type should be replaced by a data type. Two commonly used variable types for mapping keys that we already know about are address and uint. It is important to note that not every data type can be used as a key. For instance, structs and other mappings cannot be used as keys.
+Similarly, key_value should be replaced by the value type. Unlike with keys, Solidity does not limit the data type for values. It can be anything, including structs and other mappings.
+
+A real-world example of a mapping:
+mapping(address => uint256) balance;
+
+This mapping could hold the bank account balance in uint256 for the given address.
+*/
+
 
 contract SpaceDoggos {
 
