@@ -8,6 +8,7 @@ Version
 Solidity source files can contain any number of contract definitions. Each Solidity file also includes a thing called “Version Pragma”. It is used to prevent the code from being compiled with future compiler versions that might introduce incompatible changes. Most of the time, the definition looks like this:
 */
 
+
 /*
 Contracts
 Contracts in Solidity are similar to classes in object-oriented languages. They contain data in variables and functions that can modify these variables.
@@ -32,6 +33,32 @@ The address keyword is used to hold Ethereum addresses. If you're planning to st
 Strings
 The string variable is used to store text information. If you need to store a variable that should contain text information use the string keyword.
 */
+
+
+/*
+Arithmetic operations
+Integers can be used for arithmetic operations:
+    Addition x + y
+    Subtraction x - y
+    Multiplication x * y
+    Division x / y
+    Remainder x % y
+    Exponentiation x ** y (x to the power of y)
+*/
+
+
+/*
+Structs
+A struct is a special data type that allows the programmer to group a list of variables.
+Structures are defined like this:
+struct Car {
+    string make;
+    string model;
+    uint16 year;
+    uint16 horsepower;
+}
+*/
+
 
 
 contract SpaceDoggos {
