@@ -25,3 +25,15 @@ Tags:
 git tag 20210804 -m "Tag v1"
 git log --oneline
 git push --tags
+
+
+GIT clone del remoto al local:
+git clone https://github.com/blueslaboratory/playing-with-solidity.git
+
+
+Ramas o Branch (lineas temporales):
+git branch html
+git log --oneline
+git branch
+git checkout html
+git branch
