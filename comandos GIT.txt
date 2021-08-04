@@ -1,0 +1,27 @@
+Configurando email y nombre:
+git config --global user.email "myjunkandspam22@gmail.com"
+git config --global user.name "blueslaboratory"
+
+
+Trabajando en el repositorio local:
+git init
+git status
+git add .
+git log
+git commit -m "doggos v0 + comments: version, contracts"
+git log --oneline
+
+
+Del repositorio local al remoto:
+git remote add origin https://github.com/blueslaboratory/playing-with-solidity.git
+git push origin master
+
+
+Del repositorio remoto al local:
+git pull https://github.com/blueslaboratory/playing-with-solidity.git
+
+
+Tags:
+git tag 20210804 -m "Tag v1"
+git log --oneline
+git push --tags
