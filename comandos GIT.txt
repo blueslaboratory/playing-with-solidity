@@ -42,3 +42,13 @@ git branch
 GIT merge, siempre desde la rama master:
 git checkout master
 git merge html
+
+
+Updating/changing commit comments:
+Local:
+git commit --amend
+
+Remote:
+git commit --amend -m "New commit message."
+git push --force <remoteName> <branchName>
+git push --force https://github.com/blueslaboratory/playing-with-solidity.git master
