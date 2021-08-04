@@ -37,3 +37,7 @@ git log --oneline
 git branch
 git checkout html
 git branch
+
+
+GIT merge, siempre desde la rama master:
+git merge html
